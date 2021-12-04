@@ -84,6 +84,37 @@ let rec findWinningCard (numbers:list<int>) (cards:list<BingoCard>) =
     else
         findWinningCard numbers.Tail allCards
 
+let rec findLosingCard (numbers:list<int>) (cards:list<BingoCard>) =
+    // Find each card that matches the number (filter)
+    let nextNumber = numbers.Head
+
+    let includesNumber, missingNumber = 
+        cards
+        |> List.partition (fun c -> (c.Numbers |> List.exists (fun n -> n.Value = nextNumber)))
+
+    // Create a new card with that number Marked
+    let markedCards = 
+        includesNumber
+        |> List.map (markCard nextNumber)
+    
+    //Rebuild the cards list including the newly marked numbers
+    let allCards = missingNumber@markedCards
+
+    if allCards.Length = 1 then
+        // When we're down to one card remaining, if this is complete, we're done
+        if allCards |> List.forall (fun c -> isRowComplete c || isColComplete c) then
+            allCards.Head, nextNumber
+        else
+            // Keep going until the last card is complete
+            findLosingCard numbers.Tail allCards
+    else
+        // Remove any completed cards
+        let remainingCards =
+            allCards 
+            |> List.filter (fun c -> not (isRowComplete c) && not (isColComplete c))
+
+        findLosingCard numbers.Tail remainingCards
+
 let calculateScore (card:BingoCard) (multiplier:int) =
     card.Numbers
     |> List.filter (fun n -> n.Marked = false)
@@ -101,3 +132,16 @@ let playBingo (input:seq<string>) =
     let winningCard, finalNumber = findWinningCard callerNumbers bingoCards
 
     calculateScore winningCard finalNumber
+
+let playBingoToLose (input:seq<string>) =
+    let inputList = input |> List.ofSeq
+
+    let callerNumbers = inputList.Head.Split(',') |> List.ofSeq |> List.map int
+
+    let bingoCards = createBingoCards inputList.Tail.Tail list<BingoCardNumber>.Empty 0 list<BingoCard>.Empty
+
+    let losingCard, finalNumber = findLosingCard callerNumbers bingoCards
+
+    calculateScore losingCard finalNumber
+
+    
