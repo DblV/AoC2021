@@ -1,3 +1,5 @@
+module Vents
+
 let matchX (coords:((int*int)*(int*int))) =
     (coords |> fst |> fst) = (coords |> snd |> fst)
 
@@ -26,32 +28,17 @@ let getAllCoordsForNonDiagonalLines (points:((int*int)*(int*int))) =
         (points |> fst |> snd),
         (points |> snd |> snd)
 
-    printfn "startX, endX, startY, endY : %i %i %i %i" startX endX startY endY
-
     match startX, endX, startY, endY with
     | a,b,c,d when a = b -> [(min c d)..(max c d)] |> List.map (fun l -> (a,l))
     | e,f,g,h when g = h -> [(min e f)..(max e f)] |> List.map (fun l -> (l,g))
     | _ -> list<int*int>.Empty
 
-let findHotspots (data:list<string>) = 
+let findHotspots (data:seq<string>) = 
     data
+    |> List.ofSeq
     |> List.map stringToArray
     |> List.map getAllCoordsForNonDiagonalLines
     |> List.reduce (@)
     |> List.countBy (fun l -> l)
     |> List.filter (fun c -> snd(c) > 1)
     |> List.length
-
-let input = 
-    ["0,9 -> 5,9";
-    "8,0 -> 0,8";
-    "9,4 -> 3,4";
-    "2,2 -> 2,1";
-    "7,0 -> 7,4";
-    "6,4 -> 2,0";
-    "0,9 -> 2,9";
-    "3,4 -> 1,4";
-    "0,0 -> 8,8";
-    "5,5 -> 8,2";]
-
-findHotspots input
