@@ -21,7 +21,20 @@ let max x y =
     if x > y then x
     else y
 
-let getAllCoordsForNonDiagonalLines (points:((int*int)*(int*int))) =
+let getAllCoordsForDiagonal (startX:int) (endX:int) (startY:int) (endY:int) =
+    let xRange = 
+        match startX, endX with
+        | a,b when a < b -> [a..b]
+        | _ -> [endX..startX] |> List.rev
+    let yRange = 
+        match startY, endY with
+        | a,b when a < b -> [a..b]
+        | _ -> [endY..startY] |> List.rev
+
+    (xRange,yRange)
+    ||> List.map2 (fun xs ys -> (xs,ys))
+
+let getAllCoordsForLines (points:((int*int)*(int*int))) =
     let startX, endX, startY, endY =
         (points |> fst |> fst),
         (points |> snd |> fst),
@@ -31,13 +44,13 @@ let getAllCoordsForNonDiagonalLines (points:((int*int)*(int*int))) =
     match startX, endX, startY, endY with
     | a,b,c,d when a = b -> [(min c d)..(max c d)] |> List.map (fun l -> (a,l))
     | e,f,g,h when g = h -> [(min e f)..(max e f)] |> List.map (fun l -> (l,g))
-    | _ -> list<int*int>.Empty
+    | _ -> getAllCoordsForDiagonal startX endX startY endY
 
 let findHotspots (data:seq<string>) = 
     data
     |> List.ofSeq
     |> List.map stringToArray
-    |> List.map getAllCoordsForNonDiagonalLines
+    |> List.map getAllCoordsForLines
     |> List.reduce (@)
     |> List.countBy (fun l -> l)
     |> List.filter (fun c -> snd(c) > 1)
