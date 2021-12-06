@@ -1,3 +1,5 @@
+module Lanternfish
+
 let rec multiplyFish rounds (fish:list<int>)  =
     match rounds with
     | x when x > 0 -> multiplyFish 
@@ -8,11 +10,11 @@ let rec multiplyFish rounds (fish:list<int>)  =
                         |> List.map (fun f -> if f = -1 then 6 else f))
     | _ -> fish
 
-let input = "3,4,3,1,2"
-
-input
-|> (fun x -> x.Split(','))
-|> List.ofArray
-|> List.map int
-|> multiplyFish 80
-|> List.length
+let howManyFish (input:seq<string>) =
+    input
+    |> List.ofSeq
+    |> (fun x -> x.Head.Split(','))
+    |> List.ofArray
+    |> List.map int
+    |> multiplyFish 80
+    |> List.length

@@ -11,6 +11,7 @@
     <Compile Include="Depth.fs" />
     <Compile Include="Diagnostic.fs" />
     <Compile Include="Drive.fs" />
+    <Compile Include="Lanternfish.fs" />
     <Compile Include="Vents.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
