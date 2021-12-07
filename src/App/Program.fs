@@ -13,6 +13,6 @@ let main args =
     // printfn "%f" (analyseDiagnosticReport' (Lib.readLines args[0]))
     // printfn "%i" (playBingoToLose (Lib.readLines args[0]))
     // printfn "%i" (findHotspots (Lib.readLines args[0]))
-    printfn "%A" (howManyFish (Lib.readLines args[0]))
+    printfn "%f" (howManyFish (Lib.readLines args[0]))
     
     0 // return an integer exit code
