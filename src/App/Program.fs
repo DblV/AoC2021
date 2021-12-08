@@ -1,4 +1,5 @@
 ﻿open Bingo
+open Crabs
 open Depth
 open Diagnostic
 open Drive
@@ -13,6 +14,7 @@ let main args =
     // printfn "%f" (analyseDiagnosticReport' (Lib.readLines args[0]))
     // printfn "%i" (playBingoToLose (Lib.readLines args[0]))
     // printfn "%i" (findHotspots (Lib.readLines args[0]))
-    printfn "%f" (howManyFish (Lib.readLines args[0]))
+    // printfn "%f" (howManyFish (Lib.readLines args[0]))
+    printfn "%i" answer
     
     0 // return an integer exit code
