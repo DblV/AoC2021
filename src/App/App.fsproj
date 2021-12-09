@@ -13,6 +13,7 @@
     <Compile Include="Diagnostic.fs" />
     <Compile Include="Drive.fs" />
     <Compile Include="Lanternfish.fs" />
+    <Compile Include="LavaTunnels.fs" />
     <Compile Include="SevenSegment.fs" />
     <Compile Include="Vents.fs" />
     <Compile Include="Program.fs" />
