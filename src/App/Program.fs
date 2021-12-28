@@ -1,7 +1,7 @@
-﻿open Navigation
+﻿open ThermalImaging
 
 [<EntryPoint>]
 let main args =
-    printfn "%A" (calculateSyntaxErrorScore (Lib.readLines args[0]))
+    printfn "%A" (getAnswer (Lib.readLines args[0]))
 
     0 // return an integer exit code

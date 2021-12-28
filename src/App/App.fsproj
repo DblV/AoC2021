@@ -16,6 +16,7 @@
     <Compile Include="LavaTunnels.fs" />
     <Compile Include="Navigation.fs" />
     <Compile Include="SevenSegment.fs" />
+    <Compile Include="ThermalImaging.fs" />
     <Compile Include="Vents.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
