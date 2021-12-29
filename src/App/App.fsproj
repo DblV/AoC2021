@@ -15,6 +15,7 @@
     <Compile Include="Lanternfish.fs" />
     <Compile Include="LavaTunnels.fs" />
     <Compile Include="Navigation.fs" />
+    <Compile Include="Polymerisation.fs" />
     <Compile Include="SevenSegment.fs" />
     <Compile Include="ThermalImaging.fs" />
     <Compile Include="Vents.fs" />

@@ -1,4 +1,4 @@
-﻿open ThermalImaging
+﻿open Polymerisation
 
 [<EntryPoint>]
 let main args =
